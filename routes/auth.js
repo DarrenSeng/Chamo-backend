@@ -7,6 +7,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
+router.get('/testroute', async(req,res) => {
+    return res.json({message:'Test route is working!'})
+})
 
 
 //authenticating users
