@@ -11,7 +11,8 @@ app.set('view engine', 'ejs')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 const server = http.createServer(app)
-const uri = process.env.MONGODB_URI;
+//const uri = process.env.MONGODB_URI;
+const uri = process.env.DATABASE_URL;
 const session = require("express-session")
 const MongoDBStore = require('connect-mongodb-session')(session);
 const store = new MongoDBStore({
