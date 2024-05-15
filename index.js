@@ -49,7 +49,7 @@ app.use(session({
     store: store
 }));
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: process.env.FRONTEND_URL || 'https://664482df511c5f808864997f--flourishing-bublanina-0bbb76.netlify.app/',
     credentials: true
 }))
 
