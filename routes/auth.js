@@ -53,7 +53,7 @@ router.post("/", async(req,res) => {
         });
     }
     req.session.userID = user._id
-    res.json({
+    return res.status(200).json({
         userID: user._id,
         username: user.username, 
         sid: req.sessionID, 
