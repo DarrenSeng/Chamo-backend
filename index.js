@@ -83,7 +83,7 @@ mongoose.connect(uri, {
 const io = new Server(server, {
     cors: {
         // The link to our frontend
-        origin: "http://localhost:3000",
+        origin: process.env.FRONTEND_URL || 'https://664482df511c5f808864997f--flourishing-bublanina-0bbb76.netlify.app/',
         methods: ["GET", "POST"]
     }
 })
