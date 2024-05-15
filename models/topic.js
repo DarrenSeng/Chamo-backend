@@ -9,7 +9,8 @@ const topicSchema = new mongoose.Schema({
     topicImage: {
         data: Buffer, // Buffer to store binary data (image)
         contentType: String // Content type of the image (e.g., "image/png", "image/jpeg", etc.)
-    }
+    },
+    verified: { type: Boolean, default: false }
 });
 
 

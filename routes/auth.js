@@ -35,30 +35,28 @@ router.post("/", async(req,res) => {
     try {
         const {error} = validate(req.body);
         if (error) return res.status(400).send({message: error.details[0].message});
-    const user = await User.findOne({email: req.body.email});
-    if (!user) return res.status(401).send({message: "Invalid Email or Password"});
-    const validPassword = await bcrypt.compare(
-        req.body.password,
-        user.password
-    );
-    if (!validPassword) return res.status(401).send({message: "Invalid Email or Password"});
-    if (!user.verified) {
-    }
-    if (req.session.userID) { //destroy previous session when user logs in again
-        req.session.destroy((err) => {
-            if (err) {
-                console.error("Error destroying previous session:", err);
-                return res.status(500).send({ message: "Internal Server Error" });
-            }
-        });
-    }
-    req.session.userID = user._id
-    return res.status(200).json({
-        userID: user._id,
-        username: user.username, 
-        sid: req.sessionID, 
-        isLoggedIn: true
-    })
+        const user = await User.findOne({email: req.body.email});
+        if (!user) return res.status(401).send({message: "Invalid Email or Password"});
+        const validPassword = await bcrypt.compare(
+            req.body.password,
+            user.password
+        );
+        if (!validPassword) return res.status(401).send({message: "Invalid Email or Password"});
+        if (req.session.userID) { //destroy previous session when user logs in again
+            req.session.destroy((err) => {
+                if (err) {
+                    console.error("Error destroying previous session:", err);
+                    return res.status(500).send({ message: "Internal Server Error" });
+                }
+            });
+        }
+        req.session.userID = user._id
+        return res.status(200).json({
+            userID: user._id,
+            username: user.username, 
+            sid: req.sessionID, 
+            isLoggedIn: true
+        })
     } catch (error) {
         console.log(error)
         res.status(500).send({message: "Internal Server Error"});
