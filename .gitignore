@@ -1,0 +1,4 @@
+**/node_modules
+**/.env
+**/keygen.js
+**/request.rest
